@@ -1,0 +1,238 @@
+from turtle import *
+
+
+def tictac_screen():
+    shape("circle")
+    hideturtle()
+    resetscreen()
+    color("black")
+    width(3)
+    pu()
+    goto(-180,-60)
+    pd()
+    fd(360)
+    up()
+    goto(-180,60)
+    pd()
+    fd(360)
+    up()
+    rt(90)
+    goto(-60,180)
+    pd()
+    fd(360)
+    up()
+    goto(60,180)
+    pd()
+    fd(360)
+    up()
+    home()
+
+
+def cross():
+    width(5)
+    color("red")
+    pu()
+    fd(50)
+    rt(90)
+    fd(50)
+    rt(135)
+    pd()
+    fd(141.421356237)
+    up()
+    rt(135)
+    fd(100)
+    rt(135)
+    pd()
+    fd(141.421356237)
+    up()
+    seth(0)
+
+def zero():
+    width(5)
+    color("green")
+    up()
+    fd(50)
+    lt(90)
+    pd()
+    circle(50 , 360)
+    pu()
+    seth(0)
+
+def alt(num):
+    if num == 'x':
+        num = 'o'
+    elif num == 'o':
+        num = 'x'
+    else:
+        num = False
+    return num
+        
+
+def thebox(x,y,num):
+    if x in range(-180, -60):
+        if y in range(60, 180):
+            pu()
+            goto(-120, 120)
+            nw = num
+            num = alt(num)
+            return num , True
+        elif y in range(-60, 60):
+            pu()
+            goto(-120, 0)
+            cw = num
+            num = alt(num)
+            return num , True
+        elif y in range(-180, -60):
+            pu()
+            goto(-120,-120)
+            sw = num
+            num = alt(num)
+            return num , True
+        else:
+            goto(x,y)
+            return num , False
+    elif x in range(-60, 60):
+        if y in range(60, 180):
+            pu()
+            goto(0, 120)
+            nc = num
+            num = alt(num)
+            return num , True
+        elif y in range(-60, 60):
+            pu()
+            goto(0, 0)
+            cc = num
+            num = alt(num)
+            return num , True
+        elif y in range(-180, -60):
+            pu()
+            goto(0,-120)
+            sc = num
+            num = alt(num)
+            return num , True
+        else:
+            goto(x,y)
+            return num , False
+    elif x in range(60, 180):
+        if y in range(60, 180):
+            pu()
+            goto(120, 120)
+            ne = num
+            num = alt(num)
+            return num , True
+        elif y in range(-60, 60):
+            pu()
+            goto(120, 0)
+            ce = num
+            num = alt(num)
+            return num , True
+        elif y in range(-180, -60):
+            pu()
+            goto(120,-120)
+            se = num
+            num = alt(num)
+            return num , True
+        else:
+            goto(x,y)
+            return num , False
+    else:
+        goto(x,y)
+        return num , False
+
+def win_check(nw,nc,ne,cw,cc,ce,sw,sc,se,mod2):
+    if nw == nc == ne:
+        goto(-170,120)
+        pd()
+        goto(170,120)
+        up()
+        print (f"{nw} Wins")
+        mod2 = False
+    elif cw == cc == ce:
+        goto(-170,0)
+        pd()
+        goto(170,0)
+        up()
+        print (f"{nw} Wins")
+        mod2 = False
+    elif sw == sc == se:
+        goto(-170,-120)
+        pd()
+        goto(170,-120)
+        up()
+        print (f"{nw} Wins")
+        mod2 = False
+    elif nw == cw == sw:
+        goto(-120,170)
+        pd()
+        goto(-120,-170)
+        up()
+        print (f"{nw} Wins")
+        mod2 = False
+    elif nc == cc == sc:
+        goto(0,170)
+        pd()
+        goto(0,-170)
+        up()
+        print (f"{nw} Wins")
+        mod2 = False
+    elif ne == ce == se:
+        goto(120,170)
+        pd()
+        goto(120,-170)
+        up()
+        print (f"{nw} Wins")
+        mod2 = False
+    elif nw == cc == se:
+        goto(-170,170)
+        pd()
+        goto(170,-170)
+        up()
+        print (f"{nw} Wins")
+        mod2 = False
+    elif ne == cc == sw:
+        goto(170,170)
+        pd()
+        goto(-170,-170)
+        up()
+        print (f"{nw} Wins")
+        mod2 = False
+    else:
+        print ("rrr")
+    return nw,nc,ne,cw,cc,ce,sw,sc,se,mod2
+
+def cord(x,y):
+    return x , y
+    
+def play(roo, num):
+    onscreenclick(goto)
+    x,y = position()
+    num , joy = thebox(x,y,num)
+    if joy == True:
+        if num == 'x':
+            cross()
+        elif num == 'o':
+            zero()
+    roo += 1
+    return roo , num
+    
+def main():
+    tictac_screen()
+    roo = 0
+    tr = 0
+    num = 'x'
+    while tr == roo:
+        tr , num  = play(tr, num)
+        roo = tr
+    
+    return "PLS WORK"
+
+if __name__ == "__main__":
+    msg = main()
+    print(msg)
+    mainloop()
+
+    
+    
+    
+
+    
