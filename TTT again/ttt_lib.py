@@ -7,7 +7,8 @@ cursor = Turtle()
 cursor.shape("circle")    
 cursor.width(3)
 cursor.speed(10)
-st = 2 #(0 --> ON click work , 1 --> on click dont work, 2 --> ended )
+st = 2 
+#(0 --> ON click work , 1 --> on click dont work, 2 --> ended )
 
 values = ['x','o']
 
